@@ -46,6 +46,16 @@ class TimeBlock:
 			if v is not None:
 				times[k] = v
 		return times
+	
+	def checkForConflicts(self, other: "TimeBlock"):
+		self_datetimes = self.getOutputDict()
+		other_datetimes = other.getOutputDict()
+		for day, times in self_datetimes.items():
+			if other_datetimes[day] is not None:
+				# Both start before the other one ends iff they conflict
+				if times["start"] < other_datetimes[day]["end"] and other_datetimes[day]["start"] < times["end"]:
+					return True
+		return False
 
 	def getLabel(self):
 		return self.label
