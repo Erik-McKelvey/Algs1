@@ -19,5 +19,5 @@ from django.urls import path
 from apis.views import generate
 
 urlpatterns = [
-    path("schedule", generate),
+    path("schedule/", generate),
 ]
